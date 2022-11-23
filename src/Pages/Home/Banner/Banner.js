@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
 // import "swiper/css/pagination";
-import "swiper/css/navigation";
+// import "swiper/css/navigation";
 
 // import required modules
 import { Pagination, Navigation, Autoplay } from "swiper";
@@ -31,7 +31,7 @@ const Banner = () => {
       >
         <SwiperSlide>
           <div
-            className="lg:h-[600px] bg-cover bg-center bg-no-repeat text-white "
+            className="lg:h-[600px] bg-cover bg-center bg-no-repeat text-white"
             style={{
               backgroundImage: `url(${"https://images.unsplash.com/photo-1609500537901-91f5b4c900e6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80"})`,
             }}
