@@ -1,68 +1,80 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../../assets/logo2.png";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const Nav = () => {
+  const { user, logOut } = useContext(AuthContext);
+  const handleLogOut = () => {
+    logOut().then().catch();
+  };
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuItem = (
     <>
       <li>
         <Link
-          to="/product"
-          aria-label="Our product"
-          title="Our product"
+          to="/allProduct"
+          aria-label="All Product"
+          title="All Product"
           className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
         >
-          Product
+          All Product
         </Link>
       </li>
       <li>
-        <a
-          href="/"
-          aria-label="Our product"
-          title="Our product"
+        <Link
+          to="/"
+          aria-label="Blog"
+          title="Blog"
           className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
         >
-          Features
-        </a>
+          Blog
+        </Link>
       </li>
-      <li>
-        <a
-          href="/"
-          aria-label="Product pricing"
-          title="Product pricing"
-          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-        >
-          Pricing
-        </a>
-      </li>
-      <li>
-        <a
-          href="/"
-          aria-label="About us"
-          title="About us"
-          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-        >
-          About us
-        </a>
-      </li>
-      <li>
-        <a
-          href="/signin"
-          className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-[#ffbd59] hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-          aria-label="Sign up"
-          title="Sign up"
-        >
-          Sign in
-        </a>
-      </li>
+
+      {user?.uid ? (
+        <>
+          <li>
+            <Link
+              to="/dashboard"
+              aria-label="DashBoard"
+              title="DashBoard"
+              className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+            >
+              DashBoard
+            </Link>
+          </li>
+          <li>
+            <Link
+              onClick={handleLogOut}
+              className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-[#ffbd59] hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+              aria-label="Sign up"
+              title="Sign up"
+            >
+              Sign Out
+            </Link>
+          </li>
+        </>
+      ) : (
+        <li>
+          <Link
+            to="/signin"
+            className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-[#ffbd59] hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+            aria-label="Sign up"
+            title="Sign up"
+          >
+            Sign in
+          </Link>
+        </li>
+      )}
     </>
   );
   return (
     <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:w-full md:px-24 lg:px-8">
       <div className="relative flex items-center justify-between">
-        <a
-          href="/"
+        <Link
+          to="/"
           aria-label="Company"
           title="Alene SmartPhone"
           className="inline-flex items-center"
@@ -71,7 +83,7 @@ const Nav = () => {
           <span className="ml-2 text-xl font-bold tracking-wide text-gray-700 uppercase">
             Classic Mobile
           </span>
-        </a>
+        </Link>
         <ul className="flex items-center hidden space-x-8 lg:flex">
           {menuItem}
         </ul>
@@ -102,7 +114,7 @@ const Nav = () => {
               <div className="p-5 bg-white border rounded shadow-sm">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <a
+                    <Link
                       href="/"
                       aria-label="Company"
                       title="Classic Mobile"
@@ -112,7 +124,7 @@ const Nav = () => {
                       <span className="ml-2 text-xl font-bold tracking-wide text-gray-700 uppercase">
                         Classic Mobile
                       </span>
-                    </a>
+                    </Link>
                   </div>
                   <div>
                     <button

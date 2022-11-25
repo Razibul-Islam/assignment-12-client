@@ -1,40 +1,95 @@
 import { GoogleAuthProvider } from "firebase/auth";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 const Login = () => {
-  const { signIn, googleCreate } = useContext(AuthContext);
+  const { signIn, googleCreate, resetPassword } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const googleProvider = new GoogleAuthProvider();
+  const [loginError, setLoginError] = useState("");
+  const [showPass, setShowPass] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
+  // const [loginUserEmail, setLoginUserEmail] = useState("");
+  // const [token] = useToken(loginUserEmail);
+
+  // if (token) {
+  //   navigate(from, { replace: true });
+  // }
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const navigate = useNavigate();
-  const googleProvider = new GoogleAuthProvider();
 
-  const handleLogin = (data) =>
+  const from = location.state?.from?.pathname || "/";
+
+  const handleLogin = (data) => {
+    setLoginError("");
     signIn(data.email, data.password)
       .then((result) => {
         const user = result.user;
         console.log(user);
         toast.success("Successfully Log In!");
-        navigate("/");
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         console.error(err.message);
+        setLoginError(err.code);
       });
+  };
 
   const googleHandler = () => {
     googleCreate(googleProvider)
       .then((result) => {
         const user = result.user;
         // console.log(user);
+        saveUser(user?.displayName, user?.email, user?.photoURL);
         navigate("/");
       })
       .catch((err) => console.error(err));
+  };
+
+  const saveUser = (
+    name,
+    email,
+    photoUrl,
+    role = "Buyer",
+    verify = false
+  ) => {
+    const user = { name, email, role, photoUrl, verify };
+    console.log(user);
+    fetch("http://localhost:5000/user", {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged) {
+          toast.success("User Login Successfully");
+        }
+      });
+  };
+
+  const passwordHandler = () => {
+    resetPassword(userEmail)
+      .then(() => {
+        toast.success("password reset email sent, please check your email.");
+      })
+      .catch((error) => console.error(error));
+  };
+  const handelEmail = (e) => {
+    // console.log(e.target.value)
+    setUserEmail(e.target.value);
   };
   return (
     <div className="h-screen flex justify-center items-center">
@@ -44,6 +99,9 @@ const Login = () => {
           onSubmit={handleSubmit(handleLogin)}
           className="space-y-6 ng-untouched ng-pristine ng-valid"
         >
+          <div>
+            {loginError && <p className="text-red-600">{loginError}</p>}
+          </div>
           <div className="space-y-1 text-sm">
             <label htmlFor="email" className="block dark:text-gray-400">
               Email
@@ -55,6 +113,7 @@ const Login = () => {
               })}
               name="email"
               id="email"
+              onChange={handelEmail}
               placeholder="Email"
               className="w-full px-4 py-3 rounded-md border dark:border-gray-700  dark:text-gray-700 focus:dark:border-violet-400"
             />
@@ -64,12 +123,12 @@ const Login = () => {
               </p>
             )}
           </div>
-          <div className="space-y-1 text-sm">
+          <div className="space-y-1 text-sm relative">
             <label htmlFor="password" className="block dark:text-gray-400">
               Password
             </label>
             <input
-              type="password"
+              type={showPass ? "text" : "password"}
               {...register("password", {
                 required: "Password is required",
               })}
@@ -78,15 +137,25 @@ const Login = () => {
               placeholder="Password"
               className="w-full px-4 py-3 rounded-md border dark:border-gray-700  dark:text-gray-700 focus:dark:border-violet-400"
             />
+            <div
+              className="absolute right-3 top-8"
+              onClick={() => setShowPass(!showPass)}
+            >
+              {showPass ? (
+                <AiFillEye className="h-6 w-6 text-gray-900" />
+              ) : (
+                <AiFillEyeInvisible className="h-6 w-6 text-gray-900" />
+              )}
+            </div>
             {errors.password && (
               <p className="text-red-600" role="alert">
                 {errors.password?.message}
               </p>
             )}
             <div className="flex justify-end text-xs dark:text-gray-400">
-              <a rel="noopener noreferrer" href="#">
+              <span onClick={passwordHandler} to="/forget">
                 Forgot Password?
-              </a>
+              </span>
             </div>
           </div>
           <button className="block w-full p-3 text-center rounded-sm dark:text-gray-900 bg-[#ffbd59]">
