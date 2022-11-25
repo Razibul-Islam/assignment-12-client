@@ -153,7 +153,7 @@ const Login = () => {
               </p>
             )}
             <div className="flex justify-end text-xs dark:text-gray-400">
-              <span onClick={passwordHandler} to="/forget">
+              <span onClick={passwordHandler}>
                 Forgot Password?
               </span>
             </div>

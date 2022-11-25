@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+// import Loader from "../../../Loader/Loader";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const AddProduct = () => {
@@ -11,8 +12,9 @@ const AddProduct = () => {
   } = useForm();
   const ImageHostKey = process.env.REACT_APP_imgbb_key;
   const date = Date.now();
-  const { user } = useContext(AuthContext);
-  console.log(user);
+  const { user, loading, setLoading } = useContext(AuthContext);
+  // console.log(user);
+  // const [isLoading, setIsLoading] = useState()
 
   const handleAddProduct = (data) => {
     // console.log(data);
@@ -57,8 +59,15 @@ const AddProduct = () => {
             .then((data) => {
               console.log(data);
               toast.success(`Your Product is successfully added!`);
+            })
+            .catch((err) => {
+              setLoading(true);
             });
         }
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoading(true);
       });
   };
 
@@ -75,9 +84,7 @@ const AddProduct = () => {
             </label>
             <input
               type="text"
-              {...register("sellerName", {
-                required: "Name is required",
-              })}
+              {...register("sellerName")}
               name="sellerName"
               id="sellerName"
               defaultValue={user?.displayName}
@@ -295,7 +302,7 @@ const AddProduct = () => {
             />
           </label>
           <button className="block w-full p-3 text-center rounded-sm dark:text-gray-900 bg-[#ffbd59] mt-6">
-            Submit
+            {loading ? "loading..." : "Submit"}
           </button>
         </form>
       </div>

@@ -7,9 +7,9 @@ import Signup from "../Pages/Signup/Signup";
 import Error from "../Pages/Shared/Error/Error";
 import PrivateRouter from "./PrivateRouter/PrivateRouter";
 import AddProduct from "../Pages/Dashboard/AddProduct/AddProduct";
-import User from "../Pages/Signup/User";
 import Dashboard from "../Layout/Dashboard/Dashboard";
 import AllProduct from "../Pages/Products/AllProduct";
+import Brand from "../Pages/Brand/Brand";
 
 const router = createBrowserRouter([
   {
@@ -30,12 +30,15 @@ const router = createBrowserRouter([
         element: <Signup></Signup>,
       },
       {
-        path: "/userRoll",
-        element: <User></User>,
+        path: "/allProduct",
+        element: <AllProduct></AllProduct>,
       },
       {
-        path: "/allProduct",
-        element: <AllProduct></AllProduct>
+        path: "/brand/:name",
+        loader: ({params}) => {
+          return fetch(`http://localhost:5000/brand/${params.name}`);
+        },
+        element:<Brand></Brand>
       },
       {
         path: "/product",
