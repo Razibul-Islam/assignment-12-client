@@ -13,6 +13,8 @@ import MyProduct from "../Pages/Dashboard/MyProduct/MyProduct";
 import MyOrders from "../Pages/Dashboard/MyOrders/MyOrders";
 import AllUser from "../Pages/Dashboard/AllUser/AllUser";
 import Blog from "../Pages/Blog/Blog";
+import Seller from "../Pages/Dashboard/AllUser/Seller";
+import Buyer from "../Pages/Dashboard/AllUser/Buyer";
 
 const router = createBrowserRouter([
   {
@@ -94,6 +96,22 @@ const router = createBrowserRouter([
         element: (
           <PrivateRouter>
             <AllUser></AllUser>
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "/dashboard/seller",
+        element: (
+          <PrivateRouter>
+          <Seller></Seller>
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "/dashboard/buyer",
+        element: (
+          <PrivateRouter>
+          <Buyer></Buyer>
           </PrivateRouter>
         ),
       },

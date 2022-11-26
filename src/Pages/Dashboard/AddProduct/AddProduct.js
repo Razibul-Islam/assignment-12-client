@@ -32,7 +32,7 @@ const AddProduct = () => {
     })
       .then((res) => res.json())
       .then((imgData) => {
-        // console.log(imgData);
+        // console.log('img', imgData);
 
         if (imgData.success) {
           const product = {

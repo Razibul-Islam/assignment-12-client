@@ -4,24 +4,21 @@ import toast from "react-hot-toast";
 import Loader from "../../../Loader/Loader";
 import User from "./User";
 
-const AllUser = () => {
+const Buyer = () => {
+  const buyerUrl = "http://localhost:5000/allUsers/Buyer";
+
   const {
-    data: users,
-    isLoading,
+    data: buyer,
     refetch,
+    isLoading,
   } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["buyer"],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/user`);
+      const res = await fetch(buyerUrl);
       const data = await res.json();
       return data;
     },
   });
-
-  
-    
-    
-    
 
   const handleDelete = (id) => {
     const proceed = window.confirm(
@@ -55,7 +52,6 @@ const AllUser = () => {
   if (isLoading) {
     return <Loader></Loader>;
   }
-
   return (
     <div className="overflow-x-auto w-full">
       <table className="table w-full">
@@ -68,12 +64,8 @@ const AllUser = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
-            <User
-              key={user._id}
-              user={user}
-              handleDelete={handleDelete}
-            ></User>
+          {buyer.map((user) => (
+            <User key={user._id} user={user} handleDelete={handleDelete}></User>
           ))}
         </tbody>
       </table>
@@ -81,4 +73,4 @@ const AllUser = () => {
   );
 };
 
-export default AllUser;
+export default Buyer;

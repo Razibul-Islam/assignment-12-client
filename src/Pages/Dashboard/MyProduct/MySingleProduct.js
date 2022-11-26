@@ -1,11 +1,10 @@
 import React from "react";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
 
 const MySingleProduct = ({ product, refetch }) => {
   const handleDelete = (id) => {
     const proceed = window.confirm(
-      "Are you sure, you want to cancel this order"
+      "Are you sure, you want to delete this user"
     );
     if (proceed) {
       fetch(`http://localhost:5000/products/${id}`, {
@@ -15,17 +14,7 @@ const MySingleProduct = ({ product, refetch }) => {
         .then((data) => {
           // console.log(data);
           if (data.deletedCount > 0) {
-            // toast.error("Success Fully Deleted");
-            toast.error("delete Successfully", {
-              position: "top-center",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            });
+            toast.success("Success Fully Deleted");
             refetch();
           }
         });
@@ -141,7 +130,7 @@ const MySingleProduct = ({ product, refetch }) => {
 
               <div className="flex justify-end">
                 <p className="inline-block font-semibold text-primary whitespace-nowrap leading-tight rounded-xl">
-                  <Link>Add Advertise Section</Link>
+                  <button>Add Advertise Section</button>
                 </p>
               </div>
             </div>
