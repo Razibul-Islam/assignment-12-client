@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
+import UseAdmin from "../../Hooks/UseAdmin";
 import useSeller from "../../Hooks/useSeller";
 import { AuthContext } from "../../Pages/AuthProvider/AuthProvider";
 import Nav from "../../Pages/Shared/Nav/Nav";
@@ -9,11 +10,12 @@ const Dashboard = () => {
   // console.log(user?.email);
   const [drawer, setDrawer] = useState(false);
   const [isSeller] = useSeller(user?.email);
+  const [isAdmin] = UseAdmin(user?.email);
   // console.log(isSeller);
   return (
     <div>
       <Nav setDrawer={setDrawer}></Nav>
-      <div className="drawer h-full drawer-mobile">
+      <div className="drawer h-screen drawer-mobile">
         <input
           id="my-drawer-2"
           type="checkbox"
@@ -33,9 +35,22 @@ const Dashboard = () => {
             >
               ✕
             </p>
-            {/* <li>
-              <Link to="/dashboard/Product">Product</Link>
-            </li> */}
+            <li>
+              <Link to="/dashboard">My Orders</Link>
+            </li>
+            {isAdmin && (
+              <>
+                <li>
+                  <Link to="/dashboard/addProduct">Add Product</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/myProduct">My Product</Link>
+                </li>
+                <li>
+                  <Link to="/dashboard/alluser">All Users</Link>
+                </li>
+              </>
+            )}
             {isSeller && (
               <>
                 <li>

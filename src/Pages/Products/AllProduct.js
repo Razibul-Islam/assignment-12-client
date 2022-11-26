@@ -34,7 +34,12 @@ const AllProduct = () => {
       ))}
 
       <div>
-        {modalData && <BookingModal modalData={modalData}></BookingModal>}
+        {modalData && (
+          <BookingModal
+            modalData={modalData}
+            setModalData={setModalData}
+          ></BookingModal>
+        )}
       </div>
     </div>
   );

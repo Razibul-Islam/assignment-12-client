@@ -1,7 +1,37 @@
 import React from "react";
+import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 
-const MySingleProduct = ({ product }) => {
+const MySingleProduct = ({ product, refetch }) => {
+  const handleDelete = (id) => {
+    const proceed = window.confirm(
+      "Are you sure, you want to cancel this order"
+    );
+    if (proceed) {
+      fetch(`http://localhost:5000/products/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          // console.log(data);
+          if (data.deletedCount > 0) {
+            // toast.error("Success Fully Deleted");
+            toast.error("delete Successfully", {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            refetch();
+          }
+        });
+    }
+  };
+
   const {
     image,
     name,
@@ -16,6 +46,7 @@ const MySingleProduct = ({ product }) => {
     PhoneNumber,
     userImage,
     userName,
+    _id,
   } = product;
   return (
     <div>
@@ -115,7 +146,10 @@ const MySingleProduct = ({ product }) => {
               </div>
             </div>
 
-            <button className="btn text-center cursor-pointer w-full mt-4 rounded-sm py-3 bg-red-600">
+            <button
+              onClick={() => handleDelete(_id)}
+              className="btn text-center cursor-pointer w-full mt-4 rounded-sm py-3 bg-red-600"
+            >
               Delete
             </button>
           </div>

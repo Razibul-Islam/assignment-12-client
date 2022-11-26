@@ -10,6 +10,9 @@ import Dashboard from "../Layout/Dashboard/Dashboard";
 import AllProduct from "../Pages/Products/AllProduct";
 import Brand from "../Pages/Brand/Brand";
 import MyProduct from "../Pages/Dashboard/MyProduct/MyProduct";
+import MyOrders from "../Pages/Dashboard/MyOrders/MyOrders";
+import AllUser from "../Pages/Dashboard/AllUser/AllUser";
+import Blog from "../Pages/Blog/Blog";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/signup",
         element: <Signup></Signup>,
+      },
+      {
+        path: '/blog',
+        element: <Blog></Blog>
       },
       {
         path: "/allProduct",
@@ -59,6 +66,14 @@ const router = createBrowserRouter([
     ),
     children: [
       {
+        path: "/dashboard",
+        element: (
+          <PrivateRouter>
+            <MyOrders></MyOrders>
+          </PrivateRouter>
+        ),
+      },
+      {
         path: "/dashboard/addProduct",
         element: (
           <PrivateRouter>
@@ -71,6 +86,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRouter>
             <MyProduct></MyProduct>
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "/dashboard/alluser",
+        element: (
+          <PrivateRouter>
+            <AllUser></AllUser>
           </PrivateRouter>
         ),
       },

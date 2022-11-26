@@ -19,12 +19,14 @@ const Brand = () => {
         ></SingleBrand>
       ))}
 
-
-
-      <div>{modalData && <BookingModal modalData={modalData}></BookingModal>}</div>
-
-
-      
+      <div>
+        {modalData && (
+          <BookingModal
+            modalData={modalData}
+            setModalData={setModalData}
+          ></BookingModal>
+        )}
+      </div>
     </div>
   );
 };

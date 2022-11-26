@@ -2,9 +2,9 @@ import React, { useContext } from "react";
 import toast from "react-hot-toast";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
-const BookingModal = ({ modalData }) => {
-  console.log(modalData);
-  const { name, resalePrice, shopLocation } = modalData;
+const BookingModal = ({ modalData, setModalData }) => {
+  // console.log(modalData);
+  const { name, resalePrice, image } = modalData;
 
   const { user } = useContext(AuthContext);
   const handleBooking = (event) => {
@@ -24,6 +24,7 @@ const BookingModal = ({ modalData }) => {
       phone,
       username,
       location,
+      productImage: image,
     };
     fetch("http://localhost:5000/addProduct", {
       method: "POST",
@@ -37,6 +38,7 @@ const BookingModal = ({ modalData }) => {
         if (data.acknowledged) {
           toast.success("ADD ODERS");
           form.reset();
+          setModalData(null);
         } else {
           toast.error("ADD AGIN");
         }
@@ -60,49 +62,81 @@ const BookingModal = ({ modalData }) => {
             onSubmit={handleBooking}
             className="grid grid-cols-1 gap-3 mt-10"
           >
-            <input
-              name="username"
-              type="text"
-              defaultValue={user?.displayName}
-              disabled
-              className="input w-full input-bordered"
-            />
-            <input
-              name="email"
-              type="email"
-              defaultValue={user?.email}
-              disabled
-              className="input w-full input-bordered"
-            />
-            <input
-              name="name"
-              type="text"
-              defaultValue={name}
-              disabled
-              className="input w-full input-bordered"
-            />
-            <input
-              name="price"
-              type="text"
-              defaultValue={resalePrice}
-              disabled
-              className="input w-full input-bordered"
-            />
-            <input
-              name="location"
-              type="text"
-              placeholder="Meeting Location"
-              className="input w-full input-bordered"
-            />
-            <input
-              name="phone"
-              type="text"
-              placeholder="Phone Number"
-              className="input w-full input-bordered"
-            />
+            <div>
+              <label className="label">
+                <span className="label-text">User Name</span>
+              </label>
+              <input
+                name="username"
+                type="text"
+                defaultValue={user?.displayName}
+                disabled
+                className="input w-full input-bordered"
+              />
+            </div>
+            <div className="mt-2">
+              <label className="label">
+                <span className="label-text">User Email</span>
+              </label>
+              <input
+                name="email"
+                type="email"
+                defaultValue={user?.email}
+                disabled
+                className="input w-full input-bordered"
+              />
+            </div>
+            <div className="mt-2">
+              <label className="label">
+                <span className="label-text">Product Name</span>
+              </label>
+              <input
+                name="name"
+                type="text"
+                defaultValue={name}
+                disabled
+                className="input w-full input-bordered"
+              />
+            </div>
+            <div className="mt-2">
+              <label className="label">
+                <span className="label-text">Product Price</span>
+              </label>
+              <input
+                name="price"
+                type="text"
+                defaultValue={resalePrice}
+                disabled
+                className="input w-full input-bordered"
+              />
+            </div>
+            <div className="mt-2">
+              <label className="label">
+                <span className="label-text">Where You want to meet?</span>
+              </label>
+              <input
+                name="location"
+                type="text"
+                placeholder="Meeting Location"
+                className="input w-full input-bordered"
+                required
+              />
+            </div>
+            <div>
+              <label className="label">
+                <span className="label-text">Your Phone Number</span>
+              </label>
+              <input
+                name="phone"
+                type="text"
+                placeholder="Phone Number"
+                className="input w-full input-bordered"
+                required
+              />
+            </div>
             <br />
             <input
-              className="btn btn-accent w-full"
+              className="btn bg-[#ffbd59] w-full"
               type="submit"
               value="Submit"
             />
