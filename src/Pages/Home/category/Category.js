@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { Link } from "react-router-dom";
 import Loader from "../../../Loader/Loader";
+import AllProduct from "../../Products/AllProduct";
 
 const Category = () => {
   const { data: categories, isLoading } = useQuery({
@@ -26,6 +27,13 @@ const Category = () => {
             {category.brand}
           </Link>
         ))}
+      </div>
+      <div>
+        <Link to="/allProduct">
+          <h1 className="mt-10 hover:underline hover:text-blue-600 cursor-pointer text-7xl text-center">
+            All Products
+          </h1>
+        </Link>
       </div>
     </div>
   );

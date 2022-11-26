@@ -55,13 +55,7 @@ const Login = () => {
       .catch((err) => console.error(err));
   };
 
-  const saveUser = (
-    name,
-    email,
-    photoUrl,
-    role = "Buyer",
-    verify = false
-  ) => {
+  const saveUser = (name, email, photoUrl, role = "Buyer", verify = false) => {
     const user = { name, email, role, photoUrl, verify };
     console.log(user);
     fetch("http://localhost:5000/user", {
@@ -85,7 +79,11 @@ const Login = () => {
       .then(() => {
         toast.success("password reset email sent, please check your email.");
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.log(error);
+        setLoginError(`${error.code}`);
+        toast.error(`${error.code}`);
+      });
   };
   const handelEmail = (e) => {
     // console.log(e.target.value)
@@ -152,10 +150,8 @@ const Login = () => {
                 {errors.password?.message}
               </p>
             )}
-            <div className="flex justify-end text-xs dark:text-gray-400">
-              <span onClick={passwordHandler}>
-                Forgot Password?
-              </span>
+            <div className="flex cursor-pointer justify-end dark:text-red-600">
+              <span onClick={passwordHandler}>Forgot Password?</span>
             </div>
           </div>
           <button className="block w-full p-3 text-center rounded-sm dark:text-gray-900 bg-[#ffbd59]">

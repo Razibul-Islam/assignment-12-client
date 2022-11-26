@@ -1,6 +1,8 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+// import Loader from "../../../Loader/Loader";
 // import Loader from "../../../Loader/Loader";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 
@@ -12,7 +14,8 @@ const AddProduct = () => {
   } = useForm();
   const ImageHostKey = process.env.REACT_APP_imgbb_key;
   const date = Date.now();
-  const { user, loading, setLoading } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   // console.log(user);
   // const [isLoading, setIsLoading] = useState()
 
@@ -46,6 +49,9 @@ const AddProduct = () => {
             userName: user.displayName,
             verify: false,
             userImage: user.photoURL,
+            userEmail: user.email,
+            description: data.description,
+            purchase: data.purchase,
           };
           //   console.log(product);
           fetch("http://localhost:5000/products", {
@@ -59,20 +65,14 @@ const AddProduct = () => {
             .then((data) => {
               console.log(data);
               toast.success(`Your Product is successfully added!`);
-            })
-            .catch((err) => {
-              setLoading(true);
+              navigate("/dashboard/myProduct");
             });
         }
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(true);
       });
   };
 
   return (
-    <section className="flex justify-center items-center  h-screen">
+    <section className="flex justify-center items-center py-5">
       <div className="w-full">
         <form
           className="max-w-xl mx-auto"
@@ -89,22 +89,21 @@ const AddProduct = () => {
               id="sellerName"
               defaultValue={user?.displayName}
               readOnly
-              placeholder="Seller Name"
               className="w-full px-4 py-3 rounded-md border dark:border-gray-700  dark:text-gray-700 focus:dark:border-violet-400"
             />
           </div>
-          <div className="space-y-1 text-sm">
+          <div className="space-y-1 text-sm mt-5">
             <label htmlFor="name" className="block dark:text-gray-400">
               Product Name
             </label>
             <input
               type="text"
               {...register("name", {
-                required: "Name is required",
+                required: "Product Name is required",
               })}
               name="name"
               id="name"
-              placeholder="Name"
+              placeholder="Product Name"
               className="w-full px-4 py-3 rounded-md border dark:border-gray-700  dark:text-gray-700 focus:dark:border-violet-400"
             />
             {errors.name && (
@@ -114,18 +113,18 @@ const AddProduct = () => {
             )}
           </div>
           <div className="space-y-1 text-sm">
-            <label htmlFor="option" className="block dark:text-gray-400">
+            <label htmlFor="brand" className="block dark:text-gray-400">
               Select Brand
             </label>
             <select
               {...register("brand", {
                 required: "Please Select your brand",
               })}
-              id="option"
+              id="brand"
               className="w-full px-4 py-3 rounded-md border dark:border-gray-700  dark:text-gray-700 focus:dark:border-violet-400"
-              required
+              // required
             >
-              <option value={""} disabled hidden selected required>
+              <option value={""} disabled hidden selected>
                 Please Select your brand
               </option>
               <option value="Iphone">Iphone</option>
@@ -150,7 +149,7 @@ const AddProduct = () => {
               <input
                 type="text"
                 {...register("originalPrice", {
-                  required: "Resale is required",
+                  required: "original Price is required",
                 })}
                 name="originalPrice"
                 id="originalPrice"
@@ -180,6 +179,26 @@ const AddProduct = () => {
               {errors.resale && (
                 <p className="text-red-600" role="alert">
                   {errors.resale?.message}
+                </p>
+              )}
+            </div>
+            <div className="space-y-1 text-sm">
+              <label htmlFor="purchase" className="block dark:text-gray-400">
+                Year of Purchase
+              </label>
+              <input
+                type="month"
+                {...register("purchase", {
+                  required: "Purchase year is required",
+                })}
+                name="purchase"
+                id="purchase"
+                placeholder="Year of Purchase"
+                className="w-full px-4 py-3 rounded-md border dark:border-gray-700  dark:text-gray-700 focus:dark:border-violet-400"
+              />
+              {errors.purchase && (
+                <p className="text-red-600" role="alert">
+                  {errors.purchase?.message}
                 </p>
               )}
             </div>
@@ -224,38 +243,13 @@ const AddProduct = () => {
               )}
             </div>
             <div className="space-y-1 text-sm">
-              <label htmlFor="option" className="block dark:text-gray-400">
-                Select condition
-              </label>
-              <select
-                {...register("select", {
-                  required: "Please Select One",
-                })}
-                id="option"
-                className="w-full px-4 py-3 rounded-md border dark:border-gray-700  dark:text-gray-700 focus:dark:border-violet-400"
-                required
-              >
-                <option value={""} disabled hidden selected required>
-                  Select One
-                </option>
-                <option value="excellent">excellent</option>
-                <option value="good">good</option>
-                <option value="fair">fair</option>
-              </select>
-              {errors.select && (
-                <p className="text-red-600" role="alert">
-                  {errors.select?.message}
-                </p>
-              )}
-            </div>
-            <div className="space-y-1 text-sm">
               <label htmlFor="number" className="block dark:text-gray-400">
                 Phone Number
               </label>
               <input
                 type="tel"
                 {...register("number", {
-                  required: "Shop Location is required",
+                  required: "Phone Number is required",
                 })}
                 name="number"
                 id="number"
@@ -268,6 +262,31 @@ const AddProduct = () => {
                 </p>
               )}
             </div>
+          </div>
+          <div className="space-y-1 text-sm">
+            <label htmlFor="condition" className="block dark:text-gray-400">
+              Select condition
+            </label>
+            <select
+              {...register("select", {
+                required: "Please Select One",
+              })}
+              id="condition"
+              className="w-full px-4 py-3 rounded-md border dark:border-gray-700  dark:text-gray-700 focus:dark:border-violet-400"
+              // required
+            >
+              <option value={""} disabled hidden selected>
+                Select One
+              </option>
+              <option value="excellent">excellent</option>
+              <option value="good">good</option>
+              <option value="fair">fair</option>
+            </select>
+            {errors.select && (
+              <p className="text-red-600" role="alert">
+                {errors.select?.message}
+              </p>
+            )}
           </div>
 
           {/* Image File */}
@@ -290,7 +309,7 @@ const AddProduct = () => {
               />
             </svg>
 
-            <h2 className="mx-3 text-gray-400">Profile Photo</h2>
+            <h2 className="mx-3 text-gray-400">Product Photo</h2>
 
             <input
               {...register("url", {
@@ -301,8 +320,35 @@ const AddProduct = () => {
               className="hidden"
             />
           </label>
+          {errors.url && (
+            <p className="text-red-600" role="alert">
+              {errors.url?.message}
+            </p>
+          )}
+
+          <div className="space-y-1 text-sm  mt-5">
+            <label htmlFor="description" className="block dark:text-gray-400">
+              Description
+            </label>
+            <textarea
+              type="tel"
+              {...register("description", {
+                required: "Description is required",
+              })}
+              name="description"
+              id="description"
+              rows={5}
+              placeholder="Description..."
+              className="w-full px-4 py-3 border rounded-md dark:border-gray-700  dark:text-gray-700 focus:dark:border-violet-400 "
+            />
+            {errors.description && (
+              <p className="text-red-600" role="alert">
+                {errors.description?.message}
+              </p>
+            )}
+          </div>
           <button className="block w-full p-3 text-center rounded-sm dark:text-gray-900 bg-[#ffbd59] mt-6">
-            {loading ? "loading..." : "Submit"}
+            Submit
           </button>
         </form>
       </div>

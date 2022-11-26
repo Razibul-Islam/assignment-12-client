@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layout/Main/Main";
 import Home from "../Pages/Home/Home/Home";
-import Product from "../Pages/Products/Product";
 import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Signup/Signup";
 import Error from "../Pages/Shared/Error/Error";
@@ -10,6 +9,7 @@ import AddProduct from "../Pages/Dashboard/AddProduct/AddProduct";
 import Dashboard from "../Layout/Dashboard/Dashboard";
 import AllProduct from "../Pages/Products/AllProduct";
 import Brand from "../Pages/Brand/Brand";
+import MyProduct from "../Pages/Dashboard/MyProduct/MyProduct";
 
 const router = createBrowserRouter([
   {
@@ -31,20 +31,20 @@ const router = createBrowserRouter([
       },
       {
         path: "/allProduct",
-        element: <AllProduct></AllProduct>,
+        element: (
+          <PrivateRouter>
+            <AllProduct></AllProduct>
+          </PrivateRouter>
+        ),
       },
       {
         path: "/brand/:name",
-        loader: ({params}) => {
+        loader: ({ params }) => {
           return fetch(`http://localhost:5000/brand/${params.name}`);
         },
-        element:<Brand></Brand>
-      },
-      {
-        path: "/product",
         element: (
           <PrivateRouter>
-            <Product></Product>
+            <Brand></Brand>
           </PrivateRouter>
         ),
       },
@@ -63,6 +63,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRouter>
             <AddProduct></AddProduct>
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "/dashboard/myProduct",
+        element: (
+          <PrivateRouter>
+            <MyProduct></MyProduct>
           </PrivateRouter>
         ),
       },
