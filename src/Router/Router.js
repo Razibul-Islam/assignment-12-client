@@ -16,6 +16,9 @@ import Blog from "../Pages/Blog/Blog";
 import Seller from "../Pages/Dashboard/AllUser/Seller";
 import Buyer from "../Pages/Dashboard/AllUser/Buyer";
 import AllReport from "../Pages/Dashboard/AllReport/AllReport";
+import AdminRoute from "./AdminRoute/AdminRoute";
+import SellerRoute from "./SellerRoute/SellerRoute";
+import Payment from "../Pages/Dashboard/MyOrders/Payment";
 
 const router = createBrowserRouter([
   {
@@ -36,8 +39,8 @@ const router = createBrowserRouter([
         element: <Signup></Signup>,
       },
       {
-        path: '/blog',
-        element: <Blog></Blog>
+        path: "/blog",
+        element: <Blog></Blog>,
       },
       {
         path: "/allProduct",
@@ -70,59 +73,65 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/dashboard",
-        element: (
-          <PrivateRouter>
-            <MyOrders></MyOrders>
-          </PrivateRouter>
-        ),
+        element: <MyOrders></MyOrders>,
       },
       {
         path: "/dashboard/addProduct",
         element: (
-          <PrivateRouter>
+          <SellerRoute>
             <AddProduct></AddProduct>
-          </PrivateRouter>
+          </SellerRoute>
         ),
       },
       {
         path: "/dashboard/myProduct",
         element: (
-          <PrivateRouter>
+          <SellerRoute>
             <MyProduct></MyProduct>
-          </PrivateRouter>
+          </SellerRoute>
         ),
       },
       {
         path: "/dashboard/alluser",
         element: (
-          <PrivateRouter>
+          <AdminRoute>
             <AllUser></AllUser>
-          </PrivateRouter>
+          </AdminRoute>
         ),
       },
       {
         path: "/dashboard/seller",
         element: (
-          <PrivateRouter>
-          <Seller></Seller>
-          </PrivateRouter>
+          <AdminRoute>
+            <Seller></Seller>
+          </AdminRoute>
         ),
       },
       {
         path: "/dashboard/buyer",
         element: (
-          <PrivateRouter>
-          <Buyer></Buyer>
-          </PrivateRouter>
+          <AdminRoute>
+            <Buyer></Buyer>
+          </AdminRoute>
         ),
       },
       {
         path: "/dashboard/reports",
         element: (
-          <PrivateRouter>
-          <AllReport></AllReport>
-          </PrivateRouter>
+          <AdminRoute>
+            <AllReport></AllReport>
+          </AdminRoute>
         ),
+      },
+      {
+        path: "/dashboard/payment/:id",
+        element: (
+          <AdminRoute>
+            <Payment></Payment>
+          </AdminRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/orders/${params.id}`),
       },
     ],
   },

@@ -9,7 +9,11 @@ const MyOrders = () => {
   const { user } = useContext(AuthContext);
   const url = `http://localhost:5000/orders?email=${user?.email}`;
 
-  const { data: myOrders = [], isLoading, refetch } = useQuery({
+  const {
+    data: myOrders = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["bookings", user?.email],
     queryFn: async () => {
       const res = await fetch(url);
@@ -19,7 +23,9 @@ const MyOrders = () => {
   });
 
   const handleDelete = (id) => {
-    const proceed = window.confirm("are you sure? You want to Remove This Order?");
+    const proceed = window.confirm(
+      "are you sure? You want to Remove This Order?"
+    );
     if (proceed) {
       fetch(`http://localhost:5000/orders/${id}`, {
         method: "DELETE",
@@ -85,12 +91,28 @@ const MyOrders = () => {
                       <td>{order.productName}</td>
                       <td>{order.resalePrice}</td>
                       <td>
-                        <button className="bg-[#ffbd59] border-none py-1 rounded-xl px-2">
+                        {order.resalePrice && !order.paid && (
+                          <Link to={`/dashboard/payment/${order._id}`}>
+                            <button className="bg-[#ffbd59] border-none py-1 rounded-xl px-2">
+                              Pay Now
+                            </button>
+                          </Link>
+                        )}
+                        {order.resalePrice && order.paid && (
+                          <button className="bg-[#ffbd59] border-none py-1 rounded-xl px-2">
+                            Paid
+                          </button>
+                        )}
+
+                        {/* <button className="bg-[#ffbd59] border-none py-1 rounded-xl px-2">
                           Pay Now
-                        </button>
+                        </button> */}
                       </td>
                       <td>
-                        <button onClick={() => handleDelete(order._id)} className="bg-red-600 border-none py-1 rounded-md px-2 text-white">
+                        <button
+                          onClick={() => handleDelete(order._id)}
+                          className="bg-red-600 border-none py-1 rounded-md px-2 text-white"
+                        >
                           Remove Order
                         </button>
                       </td>

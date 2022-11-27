@@ -58,7 +58,7 @@ const Signup = () => {
       .catch((err) => console.error(err));
   };
 
-  const saveUser = (name, email, role, photoUrl, verify = false) => {
+  const saveUser = (name, email, role, photoUrl, verify = "false") => {
     const user = { name, email, role, photoUrl, verify };
     // console.log(user);
     fetch("http://localhost:5000/user", {

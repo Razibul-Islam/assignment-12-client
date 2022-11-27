@@ -45,7 +45,6 @@ const AddProduct = () => {
             Brand: data.brand,
             Time: date,
             userName: user.displayName,
-            verify: false,
             userImage: user.photoURL,
             userEmail: user.email,
             description: data.description,

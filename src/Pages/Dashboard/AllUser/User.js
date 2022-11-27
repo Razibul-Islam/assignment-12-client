@@ -1,7 +1,7 @@
 import React from "react";
 
-const User = ({ user, handleDelete }) => {
-  const { photoUrl, name, role, email, _id } = user;
+const User = ({ user, handleDelete, handelUserVerify }) => {
+  const { photoUrl, name, role, email, _id, verify } = user;
   return (
     <tr>
       <td>
@@ -20,14 +20,37 @@ const User = ({ user, handleDelete }) => {
       <td>{email}</td>
       <td>
         {role === "Admin" ? (
-                  <button className="bg-blue-700  text-white py-1 px-2 rounded-lg" disabled>
+          <button
+            className="bg-blue-700  text-white py-1 px-2 rounded-lg"
+            disabled
+          >
             Admin
           </button>
-        ) : (
-          <button className="bg-blue-700  text-white py-1 px-2 rounded-lg">
-            Verify
+        ) : role === "Seller" ? (
+          <button
+            onClick={() => handelUserVerify(_id)}
+            className="bg-blue-700  text-white py-1 px-2 rounded-lg"
+          >
+            {verify === "true" ? "verified" : "Verify"}
           </button>
+        ) : (
+          <p> ---- </p>
         )}
+
+        {/* {role === "Admin" ? (
+          <button
+            className="bg-blue-700  text-white py-1 px-2 rounded-lg"
+            disabled
+          >
+            Admin
+          </button>
+        ) : role === "Buyer" ? (
+          <p>---</p>
+        ) : (
+              
+            role === "Seller" && verify === "true" ? <p>bbb</p>: <p>ooooo</p>
+          
+        )} */}
       </td>
       <th>
         {role === "Admin" ? (

@@ -55,7 +55,13 @@ const Login = () => {
       .catch((err) => console.error(err));
   };
 
-  const saveUser = (name, email, photoUrl, role = "Buyer", verify = false) => {
+  const saveUser = (
+    name,
+    email,
+    photoUrl,
+    role = "Buyer",
+    verify = "false"
+  ) => {
     const user = { name, email, role, photoUrl, verify };
     console.log(user);
     fetch("http://localhost:5000/user", {

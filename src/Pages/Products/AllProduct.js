@@ -16,7 +16,16 @@ const AllProduct = () => {
       return data;
     },
   });
+  // const { data: user } = useQuery({
+  //   queryKey: ["user"],
+  //   queryFn: async () => {
+  //     const res = await fetch(`http://localhost:5000/users/verify/${user}`);
+  //     const data = await res.json();
+  //     return data;
+  //   },
+  // });
 
+  // console.log(user);
   const [modalData, setModalData] = useState(null);
   const [reportModalData, setReportModalData] = useState(null);
 

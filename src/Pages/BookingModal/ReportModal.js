@@ -13,12 +13,11 @@ const ReportModal = ({ reportModalData, setReportModalData }) => {
     const form = e.target;
     const reportmessage = form.reportmessage.value;
 
-
     const report = {
       productName: name,
       reportmessage,
       reporter: user?.email,
-    }
+    };
     fetch("http://localhost:5000/addReport", {
       method: "POST",
       headers: {
@@ -36,7 +35,7 @@ const ReportModal = ({ reportModalData, setReportModalData }) => {
           toast.error("ADD AGIN");
         }
       });
-  }
+  };
 
   return (
     <div>

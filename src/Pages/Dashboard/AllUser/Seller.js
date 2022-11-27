@@ -44,7 +44,25 @@ const Seller = () => {
             }
           });
       }
-    };
+  };
+  
+  const handelUserVerify = (id) => {
+    // console.log(id);
+
+    fetch(`http://localhost:5000/users/verify/${id}`, {
+      method: "PUT",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data)
+        if (data.modifiedCount > 0) {
+          toast.success("verify Successfully");
+          refetch();
+        }
+      });
+  };
+
+
     // console.log(seller);
     if (isLoading) {
         return <Loader></Loader>
@@ -66,6 +84,7 @@ const Seller = () => {
                   key={user._id}
                   user={user}
                   handleDelete={handleDelete}
+                  handelUserVerify={handelUserVerify}
                 ></User>
               ))}
             </tbody>
