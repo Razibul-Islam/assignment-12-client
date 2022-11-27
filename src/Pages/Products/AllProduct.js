@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import Loader from "../../Loader/Loader";
 import BookingModal from "../BookingModal/BookingModal";
+import ReportModal from "../BookingModal/ReportModal";
 // import BookingModal from "../BookingModal/BookingModal";
 import SingleBrand from "../Brand/SingleBrand";
 // import Product from "./Product";
@@ -17,6 +18,7 @@ const AllProduct = () => {
   });
 
   const [modalData, setModalData] = useState(null);
+  const [reportModalData, setReportModalData] = useState(null);
 
   if (isLoading) {
     return <Loader></Loader>;
@@ -27,6 +29,7 @@ const AllProduct = () => {
       {products.map((product) => (
         <SingleBrand
           setModalData={setModalData}
+          setReportModalData={setReportModalData}
           key={product._id}
           product={product}
         ></SingleBrand>
@@ -39,6 +42,14 @@ const AllProduct = () => {
             modalData={modalData}
             setModalData={setModalData}
           ></BookingModal>
+        )}
+      </div>
+      <div>
+        {reportModalData && (
+          <ReportModal
+            reportModalData={reportModalData}
+            setReportModalData={setReportModalData}
+          ></ReportModal>
         )}
       </div>
     </div>

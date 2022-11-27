@@ -3,10 +3,10 @@ import { CirclesWithBar } from "react-loader-spinner";
 
 const Loader = () => {
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center h-[80vh]">
       <CirclesWithBar
-        height="100"
-        width="100"
+        height="300"
+        width="300"
         color="#4fa94d"
         wrapperStyle={{}}
         wrapperclassName=""

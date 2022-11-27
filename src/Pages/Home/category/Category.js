@@ -21,6 +21,7 @@ const Category = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 text-white lg:grid-cols-4 gap-6 mt-10">
         {categories.map((category) => (
           <Link
+            key={category._id}
             to={`/brand/${category.brand}`}
             className="bg-gray-400 text-6xl font-semibold p-10 text-center rounded-xl cursor-default"
           >

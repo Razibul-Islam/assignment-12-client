@@ -13,7 +13,6 @@ const BookingModal = ({ modalData, setModalData }) => {
     const username = form.name.value;
     const email = form.email.value;
     const phone = form.phone.value;
-    // const price = form.price.value;
     const name = form.name.value;
     const location = form.location.value;
 
@@ -36,7 +35,7 @@ const BookingModal = ({ modalData, setModalData }) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
-          toast.success("ADD ODERS");
+          toast.success("Order sent please Pay now for confirm your Order");
           form.reset();
           setModalData(null);
         } else {
@@ -47,17 +46,17 @@ const BookingModal = ({ modalData, setModalData }) => {
 
   return (
     <div>
-      <input type="checkbox" id="oders-modal" className="modal-toggle" />
+      <input type="checkbox" id="buy-modal" className="modal-toggle" />
 
       <div className="modal">
         <div className="modal-box text-gray-700 relative">
           <label
-            htmlFor="oders-modal"
+            htmlFor="buy-modal"
             className="btn btn-sm btn-circle absolute right-2 top-2"
           >
             ✕
           </label>
-          <h3 className="text-lg font-bold">{name}</h3>
+          <h3 className="text-lg font-bold">Buy Now</h3>
           <form
             onSubmit={handleBooking}
             className="grid grid-cols-1 gap-3 mt-10"
@@ -129,6 +128,7 @@ const BookingModal = ({ modalData, setModalData }) => {
               <input
                 name="phone"
                 type="text"
+                pattern="[0-9]+"
                 placeholder="Phone Number"
                 className="input w-full input-bordered"
                 required
@@ -136,7 +136,7 @@ const BookingModal = ({ modalData, setModalData }) => {
             </div>
             <br />
             <input
-              className="btn bg-[#ffbd59] w-full"
+              className="btn bg-[#ffbd59] border-none w-full"
               type="submit"
               value="Submit"
             />

@@ -44,7 +44,7 @@ const Banner = () => {
                 they enough of a head-turner to become a phone's key selling
                 points?
               </p>
-              <button className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-[#ffbd59] hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none lg:static absolute bottom-5 right-5">
+              <button className="inline-flex border-none items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-[#ffbd59] hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none lg:static absolute bottom-5 right-5">
                 Discover More
               </button>
             </div>
@@ -67,7 +67,7 @@ const Banner = () => {
                 feature lower-res OLEDs, no microSD expansion, and no chargers
                 in the box.
               </p>
-              <button className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-[#ffbd59] hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none lg:static absolute bottom-5 right-5">
+              <button className="inline-flex border-none items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-[#ffbd59] hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none lg:static absolute bottom-5 right-5">
                 Discover More
               </button>
             </div>
@@ -87,7 +87,7 @@ const Banner = () => {
                 Hawaii, where the company announced its new flagship chipset
                 Snapdragon 8 Gen 2.
               </p>
-              <button className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-[#ffbd59] hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none lg:static absolute bottom-5 right-5">
+              <button className="inline-flex border-none items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-[#ffbd59] hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none lg:static absolute bottom-5 right-5">
                 Discover More
               </button>
             </div>
@@ -108,7 +108,7 @@ const Banner = () => {
                 morphing into a pill, the introduction of an Always-On display,
                 and an all-new primary camera
               </p>
-              <button className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-[#ffbd59] hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none lg:static absolute bottom-5 right-5">
+              <button className="inline-flex border-none items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-[#ffbd59] hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none lg:static absolute bottom-5 right-5">
                 Discover More
               </button>
             </div>

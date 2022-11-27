@@ -15,6 +15,7 @@ import AllUser from "../Pages/Dashboard/AllUser/AllUser";
 import Blog from "../Pages/Blog/Blog";
 import Seller from "../Pages/Dashboard/AllUser/Seller";
 import Buyer from "../Pages/Dashboard/AllUser/Buyer";
+import AllReport from "../Pages/Dashboard/AllReport/AllReport";
 
 const router = createBrowserRouter([
   {
@@ -112,6 +113,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRouter>
           <Buyer></Buyer>
+          </PrivateRouter>
+        ),
+      },
+      {
+        path: "/dashboard/reports",
+        element: (
+          <PrivateRouter>
+          <AllReport></AllReport>
           </PrivateRouter>
         ),
       },

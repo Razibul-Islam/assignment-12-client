@@ -19,7 +19,7 @@ const Subscribe = () => {
         </div>
       </div>
 
-      <div className="flex bg-white items-center justify-center pb-6 md:py-0 md:w-1/2">
+      <div className=" md:flex mt-3 md:mt-0 bg-white items-center justify-center pb-6 md:py-0 md:w-1/2">
         <form onSubmit={handlereload}>
           <div className="flex flex-col p-1.5 overflow-hidden border rounded-lg dark:border-gray-600 lg:flex-row dark:focus-within:border-blue-300 focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300">
             <input
@@ -30,7 +30,7 @@ const Subscribe = () => {
               aria-label="Enter your email"
             />
 
-            <button className="px-4 py-3 text-sm font-medium tracking-wider text-black uppercase transition-colors duration-300 transform bg-[#ffbd59] focus:outline-none">
+            <button className="px-4 py-3 text-sm font-medium tracking-wider text-black uppercase transition-colors duration-300 transform border-none bg-[#ffbd59] focus:outline-none">
               subscribe
             </button>
           </div>

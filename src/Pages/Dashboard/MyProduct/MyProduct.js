@@ -7,7 +7,6 @@ import MySingleProduct from "./MySingleProduct";
 
 const MyProduct = () => {
   const { user } = useContext(AuthContext);
-  // const [products, setProducts] = useState([]);
 
   const url = `http://localhost:5000/dashboard/myProduct?email=${user?.email}`;
 
@@ -16,7 +15,7 @@ const MyProduct = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["bookings", user?.email],
+    queryKey: ["myProduct", user?.email],
     queryFn: async () => {
       const res = await fetch(url);
       const data = await res.json();

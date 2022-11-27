@@ -2,8 +2,6 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-// import Loader from "../../../Loader/Loader";
-// import Loader from "../../../Loader/Loader";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const AddProduct = () => {
@@ -75,7 +73,7 @@ const AddProduct = () => {
     <section className="flex justify-center items-center py-5">
       <div className="w-full">
         <form
-          className="max-w-xl mx-auto"
+          className="max-w-xl mx-auto px-4 md:px-0"
           onSubmit={handleSubmit(handleAddProduct)}
         >
           <div className="space-y-1 text-sm">
@@ -347,7 +345,7 @@ const AddProduct = () => {
               </p>
             )}
           </div>
-          <button className="block w-full p-3 text-center rounded-sm dark:text-gray-900 bg-[#ffbd59] mt-6">
+          <button className="block w-full p-3 text-center rounded-sm dark:text-gray-900 bg-[#ffbd59] border-none mt-6">
             Submit
           </button>
         </form>

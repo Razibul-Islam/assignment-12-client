@@ -289,7 +289,7 @@ const Signup = () => {
               </p>
             )}
           </div>
-          <button className="block w-full p-3 text-center rounded-sm dark:text-gray-900 bg-[#ffbd59]">
+          <button className="block w-full p-3 text-center rounded-sm border-none dark:text-gray-900 bg-[#ffbd59]">
             Sign in
           </button>
         </form>

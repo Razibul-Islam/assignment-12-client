@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-const SingleBrand = ({ product, setModalData }) => {
+const SingleBrand = ({ product, setModalData, setReportModalData }) => {
   const {
     image,
     name,
@@ -112,18 +111,26 @@ const SingleBrand = ({ product, setModalData }) => {
 
               <div className="flex justify-end">
                 <p className="inline-block font-semibold text-primary whitespace-nowrap leading-tight rounded-xl">
-                  <Link>Report</Link>
+                  <label
+                    htmlFor="report-modal"
+                    onClick={() => setReportModalData(product)}
+                    className="cursor-pointer"
+                  >
+                    Report
+                  </label>
                 </p>
               </div>
             </div>
 
-            <label
-              htmlFor="oders-modal"
-              onClick={() => setModalData(product)}
-              className="btn text-center cursor-pointer w-full mt-4 rounded-sm py-3 bg-[#ffbd59]"
-            >
-              Buy Now
-            </label>
+            <div className="flex justify-between items-center">
+              <label
+                htmlFor="buy-modal"
+                onClick={() => setModalData(product)}
+                className="btn text-center cursor-pointer w-full mt-4 rounded-sm py-3 bg-[#ffbd59] border-none"
+              >
+                Buy Now
+              </label>
+            </div>
           </div>
         </div>
       </div>
