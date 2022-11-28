@@ -21,6 +21,21 @@ const MySingleProduct = ({ product, refetch }) => {
     }
   };
 
+  const handelAdvertise = (product) => {
+    const id = product._id;
+    // console.log(id);
+    fetch(`http://localhost:5000/myAdvertise/${id}`, {
+      method: "PUT",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          toast.success("Advertise SuccessFully");
+          refetch();
+        }
+      });
+  };
+
   const {
     image,
     name,
@@ -130,7 +145,9 @@ const MySingleProduct = ({ product, refetch }) => {
 
               <div className="flex justify-end">
                 <p className="inline-block font-semibold text-primary whitespace-nowrap leading-tight rounded-xl">
-                  <button>Add Advertise Section</button>
+                  <button onClick={() => handelAdvertise(product)}>
+                    Add Advertise Section
+                  </button>
                 </p>
               </div>
             </div>

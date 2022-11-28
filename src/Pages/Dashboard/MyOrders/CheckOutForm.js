@@ -10,8 +10,8 @@ const CheckOutForm = ({ orders }) => {
   const stripe = useStripe();
   const elements = useElements();
   const { resalePrice, email, username, _id } = orders;
-  console.log(orders);
-  console.log(username);
+  // console.log(orders);
+  // console.log(username);
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
@@ -73,7 +73,6 @@ const CheckOutForm = ({ orders }) => {
         method: "POST",
         headers: {
           "content-type": "application/json",
-          authorization: `bearer ${localStorage.getItem("accessToken")}`,
         },
         body: JSON.stringify(payment),
       })
@@ -89,6 +88,7 @@ const CheckOutForm = ({ orders }) => {
     setProcessing(false);
     console.log(paymentIntent);
   };
+
   return (
     <>
       <form onSubmit={handleSubmit}>

@@ -4,7 +4,7 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const ReportModal = ({ reportModalData, setReportModalData }) => {
   // console.log(reportModalData);
-  const { name } = reportModalData;
+  const { name, _id } = reportModalData;
 
   const { user } = useContext(AuthContext);
 
@@ -17,6 +17,7 @@ const ReportModal = ({ reportModalData, setReportModalData }) => {
       productName: name,
       reportmessage,
       reporter: user?.email,
+      reportProductId: _id,
     };
     fetch("http://localhost:5000/addReport", {
       method: "POST",
@@ -52,7 +53,7 @@ const ReportModal = ({ reportModalData, setReportModalData }) => {
           <form onSubmit={handleReport}>
             <div>
               <label className="label">
-                <span className="label-text">Product Id</span>
+                <span className="label-text">Product Name</span>
               </label>
               <input
                 name="username"

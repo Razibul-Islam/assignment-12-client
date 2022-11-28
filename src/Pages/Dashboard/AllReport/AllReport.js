@@ -48,7 +48,34 @@ const AllReport = () => {
     }
   };
 
-  
+  const handelDeleteProduct = (report) => {
+    const proceed = window.confirm(
+      `Are you sure, you want to delete report + this product ?`
+    );
+
+    if (proceed) {
+      fetch(`http://localhost:5000/reports/${report._id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount) {
+            fetch(`http://localhost:5000/products/${report.reportProductId}`, {
+              method: "DELETE",
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                if (data.deletedCount) {
+                  toast.success("report + product delete successFully");
+                  refetch();
+                }
+              });
+          }
+          // console.log(data)
+        });
+    }
+  };
+
   return (
     <div className="overflow-x-auto w-full">
       <table className="table w-full">
@@ -58,6 +85,7 @@ const AllReport = () => {
             <th>Email</th>
             <th>Report Message</th>
             <th>Delete Report</th>
+            <th>Delete Report Product</th>
           </tr>
         </thead>
         <tbody>
@@ -72,6 +100,14 @@ const AllReport = () => {
                   className="bg-red-700  text-white py-1 px-2 rounded-lg"
                 >
                   Delete
+                </button>
+              </td>
+              <td>
+                <button
+                  onClick={() => handelDeleteProduct(report)}
+                  className="bg-red-700  text-white py-1 px-2 rounded-lg"
+                >
+                  Delete Reported Product
                 </button>
               </td>
             </tr>
