@@ -7,7 +7,7 @@ const MySingleProduct = ({ product, refetch }) => {
       "Are you sure, you want to delete this user"
     );
     if (proceed) {
-      fetch(`https://classic-server-razibul-islam.vercel.app/products/${id}`, {
+      fetch(`http://localhost:5000/products/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -24,13 +24,17 @@ const MySingleProduct = ({ product, refetch }) => {
   const handelAdvertise = (product) => {
     const id = product._id;
     // console.log(id);
-    fetch(`https://classic-server-razibul-islam.vercel.app/myAdvertise/${id}`, {
+    fetch(`http://localhost:5000/myAdvertise/${id}`, {
       method: "PUT",
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.acknowledged) {
+        console.log(data);
+        if (data.modifiedCount > 0) {
           toast.success("Advertise SuccessFully");
+          refetch();
+        } else if (data.matchedCount > 0) {
+          toast.error("Already Advertised");
           refetch();
         }
       });

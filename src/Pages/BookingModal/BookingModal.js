@@ -26,7 +26,7 @@ const BookingModal = ({ modalData, setModalData }) => {
       productImage: image,
       productId: _id,
     };
-    fetch("https://classic-server-razibul-islam.vercel.app/addProduct", {
+    fetch("http://localhost:5000/bookings", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -39,8 +39,8 @@ const BookingModal = ({ modalData, setModalData }) => {
           toast.success("Order sent please Pay now for confirm your Order");
           form.reset();
           setModalData(null);
-        } else {
-          toast.error("ADD AGIN");
+        } else  {
+          toast.error(data.message);
         }
       });
   };

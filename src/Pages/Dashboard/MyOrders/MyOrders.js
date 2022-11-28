@@ -7,7 +7,7 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
-  const url = `https://classic-server-razibul-islam.vercel.app/orders?email=${user?.email}`;
+  const url = `http://localhost:5000/orders?email=${user?.email}`;
 
   const {
     data: myOrders = [],
@@ -27,7 +27,7 @@ const MyOrders = () => {
       "are you sure? You want to Remove This Order?"
     );
     if (proceed) {
-      fetch(`https://classic-server-razibul-islam.vercel.app/orders/${id}`, {
+      fetch(`http://localhost:5000/orders/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

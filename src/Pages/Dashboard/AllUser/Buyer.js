@@ -5,8 +5,7 @@ import Loader from "../../../Loader/Loader";
 import User from "./User";
 
 const Buyer = () => {
-  const buyerUrl =
-    "https://classic-server-razibul-islam.vercel.app/allUsers/Buyer";
+  const buyerUrl = "http://localhost:5000/allUsers/Buyer";
 
   const {
     data: buyer,
@@ -26,7 +25,7 @@ const Buyer = () => {
       "Are you sure, you want to cancel this order"
     );
     if (proceed) {
-      fetch(`https://classic-server-razibul-islam.vercel.app/users/${id}`, {
+      fetch(`http://localhost:5000/users/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
