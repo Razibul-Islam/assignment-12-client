@@ -25,7 +25,7 @@ const BookingModal = ({ modalData, setModalData }) => {
       location,
       productImage: image,
     };
-    fetch("http://localhost:5000/addProduct", {
+    fetch("https://classic-server-razibul-islam.vercel.app/addProduct", {
       method: "POST",
       headers: {
         "content-type": "application/json",

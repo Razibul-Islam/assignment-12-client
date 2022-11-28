@@ -11,7 +11,9 @@ const AllReport = () => {
   } = useQuery({
     queryKey: ["report"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/allReport");
+      const res = await fetch(
+        "https://classic-server-razibul-islam.vercel.app/allReport"
+      );
       const data = await res.json();
       return data;
     },
@@ -24,7 +26,7 @@ const AllReport = () => {
   const handleDelete = (id) => {
     const proceed = window.confirm("You want to Delete This Report?");
     if (proceed) {
-      fetch(`http://localhost:5000/reports/${id}`, {
+      fetch(`https://classic-server-razibul-islam.vercel.app/reports/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -54,15 +56,21 @@ const AllReport = () => {
     );
 
     if (proceed) {
-      fetch(`http://localhost:5000/reports/${report._id}`, {
-        method: "DELETE",
-      })
+      fetch(
+        `https://classic-server-razibul-islam.vercel.app/reports/${report._id}`,
+        {
+          method: "DELETE",
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount) {
-            fetch(`http://localhost:5000/products/${report.reportProductId}`, {
-              method: "DELETE",
-            })
+            fetch(
+              `https://classic-server-razibul-islam.vercel.app/products/${report.reportProductId}`,
+              {
+                method: "DELETE",
+              }
+            )
               .then((res) => res.json())
               .then((data) => {
                 if (data.deletedCount) {

@@ -7,7 +7,7 @@ const MySingleProduct = ({ product, refetch }) => {
       "Are you sure, you want to delete this user"
     );
     if (proceed) {
-      fetch(`http://localhost:5000/products/${id}`, {
+      fetch(`https://classic-server-razibul-islam.vercel.app/products/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -24,7 +24,7 @@ const MySingleProduct = ({ product, refetch }) => {
   const handelAdvertise = (product) => {
     const id = product._id;
     // console.log(id);
-    fetch(`http://localhost:5000/myAdvertise/${id}`, {
+    fetch(`https://classic-server-razibul-islam.vercel.app/myAdvertise/${id}`, {
       method: "PUT",
     })
       .then((res) => res.json())

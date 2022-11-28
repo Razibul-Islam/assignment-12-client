@@ -8,7 +8,7 @@ import MySingleProduct from "./MySingleProduct";
 const MyProduct = () => {
   const { user } = useContext(AuthContext);
 
-  const url = `http://localhost:5000/dashboard/myProduct?email=${user?.email}`;
+  const url = `https://classic-server-razibul-islam.vercel.app/dashboard/myProduct?email=${user?.email}`;
 
   const {
     data: myProduct = [],
@@ -22,8 +22,6 @@ const MyProduct = () => {
       return data;
     },
   });
-
-  
 
   if (isLoading) {
     return <Loader></Loader>;

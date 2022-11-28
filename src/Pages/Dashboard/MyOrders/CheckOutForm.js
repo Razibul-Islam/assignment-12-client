@@ -15,14 +15,17 @@ const CheckOutForm = ({ orders }) => {
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch("http://localhost:5000/create-payment-intent", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        // authorization: `bearer ${localStorage.getItem('accessToken')}`
-      },
-      body: JSON.stringify({ resalePrice }),
-    })
+    fetch(
+      "https://classic-server-razibul-islam.vercel.app/create-payment-intent",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // authorization: `bearer ${localStorage.getItem('accessToken')}`
+        },
+        body: JSON.stringify({ resalePrice }),
+      }
+    )
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
   }, [resalePrice]);
@@ -69,7 +72,7 @@ const CheckOutForm = ({ orders }) => {
         bookingId: _id,
       };
 
-      fetch("http://localhost:5000/payments", {
+      fetch("https://classic-server-razibul-islam.vercel.app/payments", {
         method: "POST",
         headers: {
           "content-type": "application/json",
