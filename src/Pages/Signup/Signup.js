@@ -61,7 +61,7 @@ const Signup = () => {
   const saveUser = (name, email, role, photoUrl, verify = "false") => {
     const user = { name, email, role, photoUrl, verify };
     // console.log(user);
-    fetch("http://localhost:5000/user", {
+    fetch("https://classic-server.vercel.app/user", {
       method: "POST",
       headers: {
         "content-type": "application/json",
