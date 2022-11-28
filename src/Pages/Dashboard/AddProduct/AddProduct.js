@@ -51,7 +51,7 @@ const AddProduct = () => {
             purchase: data.purchase,
           };
           //   console.log(product);
-          fetch("http://localhost:5000/products", {
+          fetch("https://classic-server.vercel.app/products", {
             method: "POST",
             headers: {
               "content-type": "application/json",

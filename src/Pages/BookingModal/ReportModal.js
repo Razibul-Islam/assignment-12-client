@@ -19,7 +19,7 @@ const ReportModal = ({ reportModalData, setReportModalData }) => {
       reporter: user?.email,
       reportProductId: _id,
     };
-    fetch("http://localhost:5000/addReport", {
+    fetch("https://classic-server.vercel.app/addReport", {
       method: "POST",
       headers: {
         "content-type": "application/json",

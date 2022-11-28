@@ -26,7 +26,7 @@ const BookingModal = ({ modalData, setModalData }) => {
       productImage: image,
       productId: _id,
     };
-    fetch("http://localhost:5000/bookings", {
+    fetch("https://classic-server.vercel.app/bookings", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -39,7 +39,7 @@ const BookingModal = ({ modalData, setModalData }) => {
           toast.success("Order sent please Pay now for confirm your Order");
           form.reset();
           setModalData(null);
-        } else  {
+        } else {
           toast.error(data.message);
         }
       });

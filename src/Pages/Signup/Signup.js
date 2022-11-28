@@ -61,7 +61,7 @@ const Signup = () => {
   const saveUser = (name, email, role, photoUrl, verify = "false") => {
     const user = { name, email, role, photoUrl, verify };
     // console.log(user);
-    fetch("http://localhost:5000/user", {
+    fetch("https://classic-server.vercel.app/user", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -75,9 +75,6 @@ const Signup = () => {
       });
   };
 
-  if (loading) {
-    return <Loader></Loader>;
-  }
   return (
     <div className="h-screen flex justify-center items-center z-50">
       <div className="w-full max-w-md  p-8 space-y-3 rounded-xl shadow-xl dark:text-gray-100">
