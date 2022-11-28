@@ -13,9 +13,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios(
-        "https://classic-server.vercel.app/myAdvertise/true"
-      );
+      const result = await axios("http://localhost:5000/myAdvertise/true");
       setData(result.data);
       setLoading(false);
     };

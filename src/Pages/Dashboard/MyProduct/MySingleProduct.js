@@ -7,7 +7,7 @@ const MySingleProduct = ({ product, refetch }) => {
       "Are you sure, you want to delete this user"
     );
     if (proceed) {
-      fetch(`https://classic-server.vercel.app/products/${id}`, {
+      fetch(`http://localhost:5000/products/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -24,7 +24,7 @@ const MySingleProduct = ({ product, refetch }) => {
   const handelAdvertise = (product) => {
     const id = product._id;
     // console.log(id);
-    fetch(`https://classic-server.vercel.app/myAdvertise/${id}`, {
+    fetch(`http://localhost:5000/myAdvertise/${id}`, {
       method: "PUT",
     })
       .then((res) => res.json())
@@ -55,6 +55,7 @@ const MySingleProduct = ({ product, refetch }) => {
     userImage,
     userName,
     _id,
+    sold,
   } = product;
   return (
     <div>
@@ -149,9 +150,17 @@ const MySingleProduct = ({ product, refetch }) => {
 
               <div className="flex justify-end">
                 <p className="inline-block font-semibold text-primary whitespace-nowrap leading-tight rounded-xl">
-                  <button onClick={() => handelAdvertise(product)}>
+                  {/* <button onClick={() => handelAdvertise(product)}>
                     Add Advertise Section
-                  </button>
+                  </button> */}
+
+                  {sold === true ? (
+                    <button onClick={() => handelAdvertise(product)}>
+                      Add Advertise Section
+                    </button>
+                  ) : (
+                    <p>This Product is Sold</p>
+                  )}
                 </p>
               </div>
             </div>

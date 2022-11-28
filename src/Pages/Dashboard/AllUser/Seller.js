@@ -5,7 +5,7 @@ import Loader from "../../../Loader/Loader";
 import User from "./User";
 
 const Seller = () => {
-  const sellerUrl = "https://classic-server.vercel.app/allUsers/Seller";
+  const sellerUrl = "http://localhost:5000/allUsers/Seller";
 
   const {
     data: seller,
@@ -25,7 +25,7 @@ const Seller = () => {
       "Are you sure, you want to cancel this order"
     );
     if (proceed) {
-      fetch(`https://classic-server.vercel.app/users/${id}`, {
+      fetch(`http://localhost:5000/users/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -52,7 +52,7 @@ const Seller = () => {
   const handelUserVerify = (id) => {
     // console.log(id);
 
-    fetch(`https://classic-server.vercel.app/users/verify/${id}`, {
+    fetch(`http://localhost:5000/users/verify/${id}`, {
       method: "PUT",
     })
       .then((res) => res.json())

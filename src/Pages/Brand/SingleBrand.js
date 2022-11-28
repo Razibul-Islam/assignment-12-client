@@ -6,7 +6,7 @@ const SingleBrand = ({ product, setModalData, setReportModalData }) => {
   //   queryKey: ["user"],
   //   queryFn: async () => {
   //     const res = await fetch(
-  //       `https://classic-server.vercel.app/users/verify/${product.userEmail}`
+  //       `http://localhost:5000/users/verify/${product.userEmail}`
   //     );
   //     const data = await res.json();
   //     return data;
