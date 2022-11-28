@@ -4,7 +4,7 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const BookingModal = ({ modalData, setModalData }) => {
   // console.log(modalData);
-  const { name, resalePrice, image } = modalData;
+  const { name, resalePrice, image, _id } = modalData;
 
   const { user } = useContext(AuthContext);
   const handleBooking = (event) => {
@@ -24,6 +24,7 @@ const BookingModal = ({ modalData, setModalData }) => {
       username,
       location,
       productImage: image,
+      productId: _id,
     };
     fetch("https://classic-server-razibul-islam.vercel.app/addProduct", {
       method: "POST",
