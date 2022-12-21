@@ -11,7 +11,7 @@ const AllProduct = () => {
   const { data: products, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const res = await fetch("https://classic-server.vercel.app/products");
+      const res = await fetch("http://localhost:5000/products");
       const data = await res.json();
       return data;
     },
@@ -19,7 +19,7 @@ const AllProduct = () => {
   // const { data: user } = useQuery({
   //   queryKey: ["user"],
   //   queryFn: async () => {
-  //     const res = await fetch(`https://classic-server.vercel.app/users/verify/${user}`);
+  //     const res = await fetch(`http://localhost:5000/users/verify/${user}`);
   //     const data = await res.json();
   //     return data;
   //   },

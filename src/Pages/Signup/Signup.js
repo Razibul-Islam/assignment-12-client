@@ -34,9 +34,11 @@ const Signup = () => {
           displayName: data.name,
           photoURL: data.url,
         };
+        // console.log(userInfo);
         updateUser(userInfo)
           .then((result) => {
-            // console.log(result);
+            console.log(userInfo);
+            console.log(result);
             saveUser(data.name, data.email, data.select, data.url);
           })
           .catch((error) => console.error(error));
@@ -70,7 +72,7 @@ const Signup = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("Save-User", data);
+        // console.log("Save-User", data);
         navigate("/");
       });
   };
@@ -315,7 +317,7 @@ const Signup = () => {
         <p className="text-xs text-center sm:px-6 dark:text-gray-400">
           Already have an account?
           <Link to="/signin" className="underline dark:text-gray-400">
-            Sign in
+            Sign Up
           </Link>
         </p>
       </div>

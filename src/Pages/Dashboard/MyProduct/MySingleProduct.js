@@ -7,7 +7,7 @@ const MySingleProduct = ({ product, refetch }) => {
       "Are you sure, you want to delete this user"
     );
     if (proceed) {
-      fetch(`https://classic-server.vercel.app/products/${id}`, {
+      fetch(`http://localhost:5000/products/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -24,7 +24,7 @@ const MySingleProduct = ({ product, refetch }) => {
   const handelAdvertise = (product) => {
     const id = product._id;
     // console.log(id);
-    fetch(`https://classic-server.vercel.app/myAdvertise/${id}`, {
+    fetch(`http://localhost:5000/myAdvertise/${id}`, {
       method: "PUT",
     })
       .then((res) => res.json())
@@ -155,11 +155,11 @@ const MySingleProduct = ({ product, refetch }) => {
                   </button> */}
 
                   {sold === true ? (
+                    <p>This Product is Sold</p>
+                  ) : (
                     <button onClick={() => handelAdvertise(product)}>
                       Add Advertise Section
                     </button>
-                  ) : (
-                    <p>This Product is Sold</p>
                   )}
                 </p>
               </div>

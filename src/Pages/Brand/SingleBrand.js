@@ -6,14 +6,14 @@ const SingleBrand = ({ product, setModalData, setReportModalData }) => {
   //   queryKey: ["user"],
   //   queryFn: async () => {
   //     const res = await fetch(
-  //       `https://classic-server.vercel.app/users/verify/${product.userEmail}`
+  //       `http://localhost:5000/users/verify/${product.userEmail}`
   //     );
   //     const data = await res.json();
   //     return data;
   //   },
   // });
 
-  // console.log(user);
+  // console.log(product.sold);
 
   const {
     image,
@@ -31,6 +31,7 @@ const SingleBrand = ({ product, setModalData, setReportModalData }) => {
     userImage,
     description,
     purchase,
+    sold,
   } = product;
   return (
     <div>
@@ -137,13 +138,24 @@ const SingleBrand = ({ product, setModalData, setReportModalData }) => {
             </div>
 
             <div className="flex justify-between items-center">
-              <label
-                htmlFor="buy-modal"
-                onClick={() => setModalData(product)}
-                className="btn text-center cursor-pointer w-full mt-4 rounded-sm py-3 bg-[#ffbd59] border-none"
-              >
-                Buy Now
-              </label>
+              {sold ? (
+                <button
+                  htmlFor="buy-modal"
+                  // onClick={() => setModalData(product)}
+                  className="btn text-center w-full mt-4 rounded-sm py-3 bg-[#ffbd5993] border-none"
+                  disabled
+                >
+                  Sold
+                </button>
+              ) : (
+                <label
+                  htmlFor="buy-modal"
+                  onClick={() => setModalData(product)}
+                  className="btn text-center cursor-pointer w-full mt-4 rounded-sm py-3 bg-[#ffbd59] border-none"
+                >
+                  Buy Now
+                </label>
+              )}
             </div>
           </div>
         </div>

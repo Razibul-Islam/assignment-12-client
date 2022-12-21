@@ -11,12 +11,12 @@ const CheckOutForm = ({ orders }) => {
   const stripe = useStripe();
   const elements = useElements();
   const { resalePrice, email, username, _id, productId } = orders;
-  console.log(productId);
+  // console.log(productId);
   // console.log(username);
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
-    fetch("https://classic-server.vercel.app/create-payment-intent", {
+    fetch("http://localhost:5000/create-payment-intent", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -70,7 +70,7 @@ const CheckOutForm = ({ orders }) => {
         bookingId: _id,
       };
 
-      fetch("https://classic-server.vercel.app/payments", {
+      fetch("http://localhost:5000/payments", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -91,11 +91,12 @@ const CheckOutForm = ({ orders }) => {
   };
 
   const handleSold = (id) => {
-    fetch(`https://classic-server.vercel.app/soldProduct/sold/${id}`, {
+    fetch(`http://localhost:5000/soldProduct/sold/${id}`, {
       method: "PUT",
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         if (data.modifiedCount > 0) {
           toast.success("paid successful.");
         }

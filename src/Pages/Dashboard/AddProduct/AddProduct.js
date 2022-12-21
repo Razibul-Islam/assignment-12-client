@@ -20,8 +20,10 @@ const AddProduct = () => {
   const handleAddProduct = (data) => {
     // console.log(data);
     const image = data.url[0];
+    // console.log(image);
     const formData = new FormData();
     formData.append("image", image);
+    // console.log(formData);
     const url = `https://api.imgbb.com/1/upload?key=${ImageHostKey}`;
     // console.log(url);
     fetch(url, {
@@ -29,10 +31,12 @@ const AddProduct = () => {
       body: formData,
     })
       .then((res) => res.json())
+      // .then((data) => console.log(data))
       .then((imgData) => {
-        // console.log('img', imgData);
+        console.log("img", imgData);
 
         if (imgData.success) {
+          console.log('image');
           const product = {
             image: imgData.data.url,
             name: data.name,
@@ -51,7 +55,7 @@ const AddProduct = () => {
             purchase: data.purchase,
           };
           //   console.log(product);
-          fetch("https://classic-server.vercel.app/products", {
+          fetch("http://localhost:5000/products", {
             method: "POST",
             headers: {
               "content-type": "application/json",

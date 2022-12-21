@@ -64,7 +64,7 @@ const Login = () => {
   ) => {
     const user = { name, email, role, photoUrl, verify };
     console.log(user);
-    fetch("https://classic-server.vercel.app/user", {
+    fetch("http://localhost:5000/user", {
       method: "PUT",
       headers: {
         "content-type": "application/json",

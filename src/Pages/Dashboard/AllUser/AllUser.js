@@ -12,7 +12,7 @@ const AllUser = () => {
   } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch(`https://classic-server.vercel.app/user`);
+      const res = await fetch(`http://localhost:5000/user`);
       const data = await res.json();
       return data;
     },
@@ -23,7 +23,7 @@ const AllUser = () => {
       "Are you sure, you want to cancel this order"
     );
     if (proceed) {
-      fetch(`https://classic-server.vercel.app/users/${id}`, {
+      fetch(`http://localhost:5000/users/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -50,7 +50,7 @@ const AllUser = () => {
   const handelUserVerify = (id) => {
     // console.log(id);
 
-    fetch(`https://classic-server.vercel.app/users/verify/${id}`, {
+    fetch(`http://localhost:5000/users/verify/${id}`, {
       method: "PUT",
     })
       .then((res) => res.json())
