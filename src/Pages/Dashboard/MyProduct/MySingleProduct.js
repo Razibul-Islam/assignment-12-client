@@ -56,6 +56,7 @@ const MySingleProduct = ({ product, refetch }) => {
     userName,
     _id,
     sold,
+    advertise,
   } = product;
   return (
     <div>
@@ -70,10 +71,15 @@ const MySingleProduct = ({ product, refetch }) => {
 
             <div className="mt-4">
               <h2
-                className="font-medium text-base md:text-lg text-gray-800 line-clamp-1"
-                title="New York"
+                className="font-medium text-base md:text-lg flex justify-between text-gray-800 line-clamp-1"
+                title={name}
               >
                 {name}
+                {advertise === "true" && (
+                  <p className="text-sm bg-black text-white px-4 py-2 rounded-2xl">
+                    This is advertised
+                  </p>
+                )}
               </h2>
               <p
                 className="mt-2 text-sm text-gray-800 line-clamp-1"
@@ -158,7 +164,9 @@ const MySingleProduct = ({ product, refetch }) => {
                     <p>This Product is Sold</p>
                   ) : (
                     <button onClick={() => handelAdvertise(product)}>
-                      Add Advertise Section
+                      {advertise
+                        ? "Remove from advertise"
+                        : "Add Advertise Section"}
                     </button>
                   )}
                 </p>

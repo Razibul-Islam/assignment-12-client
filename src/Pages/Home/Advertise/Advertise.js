@@ -7,7 +7,7 @@ import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper";
 
 const Advertise = ({ loading, advertises }) => {
-  console.log(advertises);
+  // console.log(advertises);
 
   if (loading) {
     return <Loader></Loader>;
