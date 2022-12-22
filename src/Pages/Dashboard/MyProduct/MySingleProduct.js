@@ -40,6 +40,26 @@ const MySingleProduct = ({ product, refetch }) => {
       });
   };
 
+  const removeAdvertise = (product) => {
+    const id = product._id;
+    // console.log(id);
+    fetch(`http://localhost:5000/myAdvertiseRemove/${id}`, {
+      method: "PUT",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.modifiedCount > 0) {
+          toast.success("Advertise Removed SuccessFully");
+          refetch();
+        } else if (data.matchedCount > 0) {
+          console.log(data);
+          toast.error("Already Removed");
+          refetch();
+        }
+      });
+  };
+
   const {
     image,
     name,
@@ -163,11 +183,17 @@ const MySingleProduct = ({ product, refetch }) => {
                   {sold === true ? (
                     <p>This Product is Sold</p>
                   ) : (
-                    <button onClick={() => handelAdvertise(product)}>
-                      {advertise
-                        ? "Remove from advertise"
-                        : "Add Advertise Section"}
-                    </button>
+                    <>
+                      {advertise === 'true' ? (
+                        <button onClick={() => removeAdvertise(product)}>
+                          Remove from advertise
+                        </button>
+                      ) : (
+                        <button onClick={() => handelAdvertise(product)}>
+                          Add Advertise Section
+                        </button>
+                      )}
+                    </>
                   )}
                 </p>
               </div>
